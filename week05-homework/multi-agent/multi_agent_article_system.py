@@ -10,8 +10,6 @@ from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.tools import load_mcp_tools
 from langchain_openai import ChatOpenAI
 import json
-import os
-os.environ["OPENAI_API_KEY"] = "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"
 
 # ------------------- 美化输出函数 -------------------
 def pretty_print_message(message, indent=False):
