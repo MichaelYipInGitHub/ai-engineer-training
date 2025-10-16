@@ -1,8 +1,22 @@
+import uvicorn
+from config import logger, API_CONFIG
+from api import app
+from test_service import run_tests
 
-def main():
-# 作业的入口写在这里。你可以就写这个文件，或者扩展多个文件，但是执行入口留在这里。
-# 在根目录可以通过python -m base_chat_system.main 运行
-    pass
+def start_server():
+    """启动FastAPI服务器"""
+    host = API_CONFIG["host"]
+    port = API_CONFIG["port"]
+
+    logger.info(f"启动智能客服系统服务器: http://{host}:{port}")
+
+    # 运行自动化测试
+    if run_tests():
+        logger.info("自动化测试通过，启动服务器")
+    else:
+        logger.warning("自动化测试失败，但继续启动服务器")
+
+    uvicorn.run(app, host=host, port=port, log_level="info")
 
 if __name__ == "__main__":
-    main()
+    start_server()
